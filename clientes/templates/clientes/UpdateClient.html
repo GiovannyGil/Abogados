@@ -1,0 +1,13 @@
+{% extends "base/base.html" %} 
+
+{% load static %}
+
+{% block content %}
+    <h1>ACTUALIZAR CLIENTE</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar cambios</button>
+      </form>
+      <a href="{% url 'UpdateClient' cliente.id %}">Volver al detalle del cliente</a>
+{% endblock %}

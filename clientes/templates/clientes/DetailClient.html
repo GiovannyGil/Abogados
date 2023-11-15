@@ -1,0 +1,15 @@
+{% extends "base/base.html" %} 
+
+{% load static %}
+
+{% block content %}
+    <h2>Detalles del Cliente</h2>
+    <p>ID: {{cliente.id}}</p>
+    <p>NOMBRE: {{cliente.nombre}}</p>
+    <p>APELLIDO: {{cliente.apellido}}</p>
+    <p>FECHA DE NACIMIENTO{{cliente.fecha_Nac}}</p>
+    <p>SEXO: {{cliente.sexo}}</p>
+    <p>DOCUMENTO: {{cliente.documento}}</p>
+    <p>TIPO CLIENTE: {{cliente.tipo}}</p>
+    <p>NUM DOCUMENTO: {{cliente.NumDocumento}}</p>
+{% endblock %}

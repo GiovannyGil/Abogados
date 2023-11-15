@@ -1,0 +1,13 @@
+{% extends "base/base.html" %} 
+
+{% load static %}
+
+{% block content %}
+    <h1>ACTUALIZAR CASO</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Guardar cambios</button>
+      </form>
+      <a href="{% url 'CasoUpdate' caso.id %}">Volver al detalle del caso</a>
+{% endblock %}

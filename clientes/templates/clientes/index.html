@@ -1,0 +1,74 @@
+{% extends "base/base.html" %} {% block content %}
+<!-- component -->
+
+
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+</head>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24
+    }
+    </style>
+    <a
+    type="button"
+    title="Agregar Nuevos Usuarios"
+    class="border btn btn-dark" href="{% url 'AddClientes' %}">
+    <i class="bi bi-person-plus-fill"></i>
+    </a>
+<table class="table datatable">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Cliente</th>
+            <th scope="col">Documento</th>
+            <th >Fecha de Nacimiento</th>
+            <th scope="col">sexo</th>
+            <th scope="col">tipo</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for client in cliente %}
+        <tr>
+        <td>
+            {{client.id}}
+        </td>
+        <td>
+            <div>
+            {% comment %} <img src="" alt="" /> {% endcomment %}
+            <div>
+                <div>{{client.nombre}}</div>
+                <div>{{client.apellido}}</div>
+            </div>
+            </div>
+        </td>
+        <td>{{client.NumDocumento}}</td>
+        <td>{{client.fecha_Nac}}</td>
+        <td>{{client.sexo}}</td>
+        <td>
+            <span>{{client.tipo}}</span>
+        </td>
+        <td>
+            <a href="{% url 'ClientDetail' client.id %}">
+                <span class="bx bxs-user-detail"></span>
+            </a>
+            <a href="{% url 'UpdateClient' client.id %}">
+                <span class="bx bxs-edit"></span>
+            </a>
+            <a href="{% url 'RemoveClient' client.id %}">
+                <i class="bx bxs-trash-alt"></i>
+            </a>
+        </td>
+        </tr>
+        {% endfor %}
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}

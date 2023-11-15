@@ -1,0 +1,71 @@
+{% extends "base/base.html" %}
+{% load static %}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
+</head>
+<link rel="stylesheet" href="{% static 'casos/css/casos.css' %}">
+<a
+type="button"
+title="Agregar Nuevos Usuarios"
+class="border btn btn-dark" href="{% url 'AddCaso' %}">
+<i class="bi bi-person-plus-fill"></i>
+</a>
+
+<table id="example" class="table table-striped" style="width:100%">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>TITULO</th>
+            <th>DESCRIPCION</th>
+            <th>TIPO</th>
+            <th>ESTADO</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for caso in casos %}
+        <tr>
+            <td>{{caso.titulo}}</td>
+            <td>{{caso.descripcion}}</td>
+            <td>{{caso.tipo}}</td>
+            <td>{{caso.estado}}</td>
+            <td>
+                <td>
+                    <a href="{% url 'CasoDetail' caso.id %}">
+                        <span class="bx bxs-user-detail"></span>
+                    </a>
+                    <a href="{% url 'CasoUpdate' caso.id %}">
+                        <span class="bx bxs-edit"></span>
+                    </a>
+                    <a href="{% url 'CasoRemove' caso.id %}">
+                        <i class="bx bxs-trash-alt"></i>
+                    </a>
+                </td>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>ID</th>
+            <th>TITULO</th>
+            <th>DESCRIPCION</th>
+            <th>TIPO</th>
+            <th>ESTADO</th>
+            <th>Acciones</th>
+        </tr>
+    </tfoot>
+</table>
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
+<script>
+    new DataTable('#example');
+</script>
+{% endblock  %}

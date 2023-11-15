@@ -1,0 +1,14 @@
+{% extends "base/base.html" %} 
+
+{% load static %}
+
+{% block content %}
+    <h2>Detalles del Cliente</h2>
+    <p>ID: {{caso.id}}</p>
+    <p>titulo: {{caso.titulo}}</p>
+    <p>descripcion: {{caso.descripcion}}</p>
+    <p>tipo: {{caso.tipo}}</p>
+    <p>id_cliente: {{caso.id_cliente}}</p>
+    <p>documentos: {{caso.documentos}}</p>
+    <p>estado: {{caso.estado}}</p>
+{% endblock %}

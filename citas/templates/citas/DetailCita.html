@@ -1,0 +1,16 @@
+{% extends "base/base.html" %} 
+
+{% load static %}
+
+{% block content %}
+    <h2>Detalles del Cliente</h2>
+    <p>ID: {{cita.id}}</p>
+    <p>Nombre_Persona: {{cita.Nombre_Persona}}</p>
+    <p>fecha: {{cita.fecha}}</p>
+    <p>motivo: {{cita.motivo}}</p>
+    <p>Descripcion: {{cita.Descripcion}}</p>
+    <p>user: {{cita.user}}</p>
+    <p>tipo: {{cita.tipo}}</p>
+    <p>id_cliente: {{cita.id_cliente}}</p>
+
+{% endblock %}
