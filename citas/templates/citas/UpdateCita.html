@@ -3,11 +3,104 @@
 {% load static %}
 
 {% block content %}
-    <h1>ACTUALIZAR CITA</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Guardar cambios</button>
-      </form>
-      <a href="{% url 'CitaUpdate' cita.id %}">Volver al detalle de la cita</a>
+    
+    <div class="col-lg-8">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Actualizar Cita</h5>
+
+            <!-- General Form Elements -->
+            <form method="POST" enctype="multipart/form-data" class="row mb-3">
+                {% csrf_token %}
+              <div class="col-md-6">
+                <label for="" class="col-sm-4 col-form-label">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="text" value="{{ cita.Nombre_Persona }}" name="Nombre_Persona" class="form-control" id="id_Nombre_Persona" required>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="" class="col-sm-4 col-form-label">Fecha</label>
+                <div class="col-sm-10">
+                  <input type="date" value="{% if cita.fecha %}{{ cita.fecha|date:'Y-m-d' }}{% endif %}" name="fecha" class="form-control" id="id_fecha" required>
+                </div>
+              </div>
+              
+
+              <div class="col-md-6">
+                <label for="" class="col-sm-4 col-form-label">Motivo</label>
+                <div class="col-sm-10">
+                  <input type="text" value="{{ cita.motivo }}" name="motivo" id="motivo" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-sm-4 col-form-label">Usuario</label>
+                <div class="col-sm-10">
+                  <select class="form-select" name="user" aria-label="Default select example">
+                    <!-- llamar los usuarios con un for -->
+                    <option selected>{{cita.user.username}}</option>
+                    {% for usuario in usuarios %}
+                    <option value="{{usuario.id}}">{{usuario.username}}</option>
+
+
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-sm-4 col-form-label">Tipo</label>
+                <div class="col-sm-10">
+                  <select class="form-select" name="tipo" aria-label="Default select example">
+                    <option selected>{{cita.tipo.titulo}}</option>
+                    <!-- llamar los tipos con un for -->
+                    {% for tipo in tipos %}
+                      <option name="tipo" value="{{tipo.id}}">{{tipo.titulo}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-sm-4 col-form-label">Cliente</label>
+                <div class="col-sm-10">
+                  <select class="form-select" name="id_cliente" multiple aria-label="multiple select example">
+                    <option disabled>Selecione el/los Cliente/s</option>
+                    <!-- llamar los clientes con un for -->
+                    {% for cliente in clientes %}
+                        {% if cliente.id in cita.id_cliente.all %}
+                            <option name="id_cliente" value="{{cliente.id}}" selected>{{cliente.nombre}}</option>
+                        {% else %}
+                            <option name="id_cliente" value="{{cliente.id}}">{{cliente.nombre}}</option>
+                        {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              
+
+              <div class="col-md-12">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Descripcion</label>
+                <div class="col-sm-10">
+                    <textarea name="Descripcion" class="form-control" style="height: 100px" id="id_Descripcion" required>{{ cita.Descripcion }}</textarea>
+
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">Submit Form</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+            {{error}}
+
+          </div>
+        </div>
+
+      </div>
+
 {% endblock %}

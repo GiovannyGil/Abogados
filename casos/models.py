@@ -24,26 +24,20 @@ class TipoCaso(models.Model):
 # clase -> tabla = para los casos
 class Caso(models.Model):  # tabla para los casos
     id = models.BigAutoField(primary_key=True)
-    titulo = models.CharField(
-        max_length=100, null=False, blank=False
-    )  # titulo del caso
-    descripcion = models.CharField(
-        max_length=50, null=False, blank=False
-    )  # descripcion del caso
+    titulo = models.CharField(max_length=100)  # titulo del caso
+    descripcion = models.CharField(max_length=50)  # descripcion del caso
     tipo = models.ForeignKey(
-        TipoCaso, on_delete=models.CASCADE, null=False, blank=False
-    )
+        TipoCaso, on_delete=models.CASCADE)
     # relacion con tipo de caso
     # cliente, una relacion de muchos a muchos, un cliente puede tener muchos casos
-    id_cliente = models.ManyToManyField(Cliente, verbose_name="Cliente", blank=False)
-    #    TipoAbogado = models.ManyToManyField(TipoAbogado, verbose_name='Tipo_Abogado', blank=False)
+    id_cliente = models.ManyToManyField(Cliente, verbose_name="Cliente")
+    # TipoAbogado = models.ManyToManyField(TipoAbogado, verbose_name='Tipo_Abogado', blank=False)
 
     documentos = models.FileField(
-        upload_to="documentos/casos", null=True, blank=True
-    )  # campo para subir documentos, foreingkey -> ya que se puede necesitar varios documentos
+        upload_to="documentos/casos")
+    # campo para subir documentos, foreingkey -> ya que se puede necesitar varios documentos
     estado = models.BooleanField(
-        default=False, blank=False, null=False
-    )  # estado del caso, default false, para pendiente
+        default=False,)  # estado del caso, default false, para pendiente
 
     def __str__(self):
         return self.titulo

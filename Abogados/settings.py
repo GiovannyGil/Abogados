@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'base',
     'citas',
     'login',
-    'perfiles'
+    'perfiles',
+    'usuarios',
 ]
 
 MIDDLEWARE = [

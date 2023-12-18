@@ -1,12 +1,10 @@
 {% extends "base/base.html" %}
-{% load static %}
+<!-- {% load static %} -->
 
 {% block content %}
-<head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
-</head>
-<link rel="stylesheet" href="{% static 'citas/css/citas.css' %}">
+<!-- <head>
+    <link rel="stylesheet" href="{% static 'citas/css/citas.css' %}">
+</head> -->
 <a
 type="button"
 title="Agregar Nuevos Usuarios"
@@ -14,59 +12,40 @@ class="border btn btn-dark" href="{% url 'AddCita' %}">
 <i class="bi bi-person-plus-fill"></i>
 </a>
 
-<table id="example" class="table table-striped" style="width:100%">
+<table class="table datatable">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Nombre_Persona</th>
-            <th>DESCRIPCION</th>
-            <th>FECHA</th>
-            <th>MOTIVO</th>
-            <th>Acciones</th>
+            <th scope="col">ID</th>
+            <th scope="col">CLIENTE</th>
+            <th scope="col">DESCRIPCION</th>
+            <th scope="col">FECHA</th>
+            <th scope="col">MOTIVO</th>
+            <th scope="col">Acciones</th>
         </tr>
     </thead>
     <tbody>
         {% for cita in citas %}
         <tr>
+            <td>{{cita.id}}</td>
+            <!-- traer el nombre de el cliente con la relacion de id_cliente -->
             <td>{{cita.Nombre_Persona}}</td>
             <td>{{cita.Descripcion}}</td>
             <td>{{cita.fecha}}</td>
             <td>{{cita.motivo}}</td>
-            <td>{{cita.estado}}</td>
             <td>
-                <td>
                     <a href="{% url 'CitaDetail' cita.id %}">
-                        <span class="bx bxs-user-detail"></span>
+                        <i class="bx bxs-user-detail"></i>
                     </a>
                     <a href="{% url 'CitaUpdate' cita.id %}">
-                        <span class="bx bxs-edit"></span>
+                        <i class="bx bxs-edit"></i>
                     </a>
                     <a href="{% url 'CitaRemove' cita.id %}">
                         <i class="bx bxs-trash-alt"></i>
                     </a>
-                </td>
             </td>
         </tr>
         {% endfor %}
     </tbody>
-    <tfoot>
-        <tr>
-            <th>ID</th>
-            <th>Nombre_Persona</th>
-            <th>DESCRIPCION</th>
-            <th>FECHA</th>
-            <th>motivo</th>
-            <th>Acciones</th>
-        </tr>
-    </tfoot>
 </table>
 
-
-
-<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
-<script>
-    new DataTable('#example');
-</script>
 {% endblock  %}

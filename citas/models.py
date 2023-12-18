@@ -21,12 +21,15 @@ class Cita(models.Model):
     fecha = models.DateTimeField("Fecha cita")
     motivo = models.CharField(max_length=100)  # motivo de la cita
     Descripcion = models.TextField(max_length=200)
-    #user = models.ForeignKey('auth.User', on_delete=models.CASCADE, null=False, blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE )  # relacion con tabla usuarios, eliminacion en cascada si el usuario es eliminado
+    # user = models.ForeignKey('auth.User', on_delete=models.CASCADE,
+    # null=False, blank=False)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE
+    )  # relacion con tabla usuarios, eliminacion en cascada
+
     tipo = models.ForeignKey(
-        TipoCita, on_delete=models.CASCADE, null=False, blank=False
-    )
-    id_cliente = models.ManyToManyField(Cliente, verbose_name="Cliente", blank=False)
+        TipoCita, on_delete=models.CASCADE)
+    id_cliente = models.ManyToManyField(Cliente, verbose_name="Cliente")
 
     def __str__(self):
         return self.Nombre_Persona

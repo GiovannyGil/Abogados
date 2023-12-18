@@ -29,7 +29,8 @@ urlpatterns = [
     path("dash", include('dash.urls')),
     path("login/", include('login.urls')),
     path("perfil/", include('perfiles.urls')),
-] 
+    path("usuarios/", include('usuarios.urls')),
+]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # vinvula para la ruta de los archivos multimedia en el admin 
 

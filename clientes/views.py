@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from .models import Cliente
+from .models import Cliente, TipoCliente
 from .forms import ClienteForm
 from django.http import Http404
 
@@ -15,6 +15,7 @@ def clientes(request):
 
 
 def AddClientes(request):
+    # "tipos": TipoCliente.objects.all()
     try:
         form = ClienteForm(request.POST)
         cliente = form.save(commit=False)
@@ -28,7 +29,10 @@ def AddClientes(request):
         return render(
             request,
             "clientes/AddClient.html",
-            {"form": ClienteForm, "error": "Por Favor Verifica los datos"},
+            {"form": ClienteForm,
+             "error": "Por Favor Verifica los datos",
+                "tipos": TipoCliente.objects.all()
+             },
         )
 
 
@@ -44,6 +48,7 @@ def RemoveClient(request, pk):
 
 
 def UpdateClient(request, pk):
+    tipo = TipoCliente.objects.all()
     cliente = get_object_or_404(Cliente, pk=pk)
     if request.method == 'POST':
         form = ClienteForm(request.POST, instance=cliente)
@@ -54,4 +59,5 @@ def UpdateClient(request, pk):
         form = ClienteForm(instance=cliente)
     return render(request, 'clientes/UpdateClient.html',
                   {'form': form,
-                   'cliente': cliente})
+                   'cliente': cliente,
+                   'tipo': tipo})

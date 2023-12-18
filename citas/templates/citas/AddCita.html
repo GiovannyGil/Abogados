@@ -3,11 +3,103 @@
 {% load static %}
 
 {% block content %}
-    <h1>AÑADIR CITA</h1>
-    {{error}}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button type="submit">Guardar</button>
-    </form>
+    
+    <div class="col-lg-8">
+
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Agregar Citas</h5>
+
+            <!-- General Form Elements -->
+            <form method="POST" enctype="multipart/form-data" class="row mb-3">
+                {% csrf_token %}
+              <div class="col-md-6">
+                <label for="" class="col-sm-4 col-form-label">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="text" name="Nombre_Persona" class="form-control" id="id_Nombre_Persona" required>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <label for="" class="col-sm-4 col-form-label">Fecha</label>
+                <div class="col-sm-10">
+                    <input type="date" name="fecha" class="form-control" id="id_fecha" required>
+                </div>
+              </div>
+
+              <!-- campo que permita fechas y horas al mismo tiempo
+              <div class="col-md-6">
+                <label for="" class="col-sm-4 col-form-label">Fecha</label>
+                <div class="col-sm-10">
+                  <input type="datetime-local" name="Fecha" id="Fecha" class="form-control">
+                </div>
+              </div> -->
+
+              <div class="col-md-6">
+                <label for="" class="col-sm-4 col-form-label">Motivo</label>
+                <div class="col-sm-10">
+                  <input type="text" name="motivo" id="motivo" class="form-control">
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-sm-4 col-form-label">Usuario</label>
+                <div class="col-sm-10">
+                  <select class="form-select" name="user" aria-label="Default select example">
+                    <!-- llamar los usuarios con un for -->
+                    <option selected>Selecione el Usuario</option>
+                    {% for usuario in usuarios %}
+                      <option name="user" value="{{usuario.id}}">{{usuario.username}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-sm-4 col-form-label">Tipo</label>
+                <div class="col-sm-10">
+                  <select class="form-select" name="tipo" aria-label="Default select example">
+                    <option selected>Selecione el tipo</option>
+                    <!-- llamar los tipos con un for -->
+                    {% for tipo in tipos %}
+                      <option name="tipo" value="{{tipo.id}}">{{tipo.titulo}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label class="col-sm-4 col-form-label">Cliente</label>
+                <div class="col-sm-10">
+                  <select class="form-select" name="id_cliente" multiple aria-label="multiple select example">
+                    <option selected>Selecione el/los Cliente/s</option>
+                    <!-- llamar los clientes con un for -->
+                    {% for cliente in clientes %}
+                      <option name="id_cliente" value="{{cliente.id}}">{{cliente.nombre}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <label for="inputPassword" class="col-sm-2 col-form-label">Descripcion</label>
+                <div class="col-sm-10">
+                    <textarea name="Descripcion" class="form-control" style="height: 100px" id="id_Descripcion" required></textarea>
+                </div>
+              </div>
+
+              <div class="col-md-12">
+                <div class="col-sm-10">
+                  <button type="submit" class="btn btn-primary">Submit Form</button>
+                </div>
+              </div>
+
+            </form><!-- End General Form Elements -->
+            {{error}}
+
+          </div>
+        </div>
+
+      </div>
+
 {% endblock %}

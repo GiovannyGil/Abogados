@@ -11,6 +11,12 @@
     <p>Descripcion: {{cita.Descripcion}}</p>
     <p>user: {{cita.user}}</p>
     <p>tipo: {{cita.tipo}}</p>
-    <p>id_cliente: {{cita.id_cliente}}</p>
+    <!-- mostraer el nombre del cliente o los clientes usando la relacion con la tabla clientes -->
+    <ul>
+        {% for cliente in cita.id_cliente.all %}
+            <li>{{cliente.nombre}}</li>
+        {% endfor %}
+    </ul>
+    <!-- <p>id_cliente: {{cita.id_cliente}}</p> -->
 
 {% endblock %}
